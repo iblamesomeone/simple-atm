@@ -28,8 +28,23 @@ public:
     
     // Accept withdrawal amount from user and subtract it from balance
     void withdraw () {
-        cout << "Withdrawal Amount : ";
-        cin >> temp_amount;
+        if (balance == 0) {
+            cout << "Withdrawal not allowed. Your balance is zero." << endl << endl;
+            return;
+        }
+        do {
+            cout << "Withdrawal Amount (enter 0 to cancel): ";
+            cin >> temp_amount;
+            if (temp_amount == 0) {
+                cout << "Withdrawal cancelled." << endl << endl;
+                return;
+            }
+            if (temp_amount > balance) {
+                cout << "Error: Insufficient balance for this withdrawal. Please enter a smaller amount." << endl << endl;
+            } else if (temp_amount < 0) {
+                cout << "Error: Withdrawal amount cannot be negative." << endl << endl;
+            }
+        } while (temp_amount > balance || temp_amount < 0);
         balance -= temp_amount;
         cout << "Current Balance Now Is : " << balance << endl << endl;
     }
@@ -75,4 +90,3 @@ int main () {
         cin >> z;
     }
 }
-
